@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YGO Capital Coach</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fff;--ink:#12302a;--mut:#5d7069;--line:#e1dccf;--acc:#b8892b;--acc2:#0f5c4d;--inp:#faf8f3;--bar1:#9fb8b1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08201b;--card:#0e2f28;--ink:#f1ece0;--mut:#9db3ab;--line:#1d4a40;--acc:#e0b04f;--acc2:#4cc2a5;--inp:#082822;--bar1:#2f6b5e}}
+:root[data-theme="dark"]{--bg:#08201b;--card:#0e2f28;--ink:#f1ece0;--mut:#9db3ab;--line:#1d4a40;--acc:#e0b04f;--acc2:#4cc2a5;--inp:#082822;--bar1:#2f6b5e}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{-webkit-text-size-adjust:100%;margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4}
+.w{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{font:800 26px Georgia,serif;color:var(--acc);letter-spacing:1px;border:2px solid var(--acc);padding:2px 10px;border-radius:8px}
+.sub{font-size:11px;letter-spacing:2px;color:var(--mut);text-transform:uppercase}
+h1{font:700 clamp(24px,5vw,36px) Georgia,serif;margin:18px 0 4px}
+.lead{color:var(--mut);font-size:14px;margin:0 0 18px}
+.g{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:720px){.g{grid-template-columns:1fr}}
+.c{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.c h2{font:700 18px Georgia,serif;margin:0 0 12px}
+label{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+input,select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--inp);color:var(--ink);font-size:16px}
+input[type=checkbox]{width:auto}
+button{font:inherit}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chips button,.btn{border:1px solid var(--line);background:var(--inp);color:var(--ink);border-radius:20px;padding:6px 12px;font-size:13px;cursor:pointer}
+.chips button:hover,.btn:hover{border-color:var(--acc)}
+.btn.p{background:var(--acc2);color:#fff;border-color:var(--acc2);padding:10px 16px;font-size:14px}
+.k{font-size:12px;color:var(--mut);margin-top:10px}.v{font:700 clamp(22px,4.5vw,30px) Georgia,serif}
+.gold{color:var(--acc)}.grn{color:var(--acc2)}
+.msg{background:linear-gradient(135deg,var(--acc2),var(--ink));color:#fff;border:0}
+.msg p{margin:0;font-size:15px}.msg b{color:#ffd77a}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 6px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-weight:600;font-size:12px}
+.wrap{overflow-x:auto}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc2),var(--acc));width:0;transition:width .4s}
+.lg{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-top:6px}.lg span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;background:var(--bar1)}.lg span+span:before{background:var(--acc)}
+.full{grid-column:1/-1}
+.small{font-size:12px;color:var(--mut);margin-top:16px}
+.tri{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}@media(max-width:520px){.tri{grid-template-columns:1fr}}
+.tri div.b{background:var(--inp);border:1px solid var(--line);border-radius:12px;padding:12px}
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end}@media(max-width:520px){.sp{grid-template-columns:1fr 1fr}}
+.tag{display:inline-flex;gap:6px;align-items:center;background:var(--inp);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:13px;margin:4px 6px 0 0}
+.tag b{cursor:pointer;color:var(--acc)}
+#rd{background:var(--inp);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;margin-top:10px}
+svg rect.h{cursor:pointer}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="app">
+<div class="brand"><div class="logo">YGO</div><div><b>Capital Coach</b><div class="sub">Entrenador de ahorro · Yankles Gutiérrez Orellano</div></div></div>
+<h1 id="ttl">¿Qué puede hacer tu hábito de ahorro?</h1>
+<p class="lead">Calculadora educativa de ahorro e interés compuesto. Cambia el aporte, la moneda, la frecuencia, la tasa y el plazo, y suma aportes especiales.</p>
+
+<div class="g">
+<div class="c"><h2>Tu hábito</h2>
+<label for="cur">Moneda</label>
+<select id="cur"><option value="COP">Peso colombiano (COP)</option><option value="USD">Dólar (USD)</option><option value="EUR">Euro (EUR)</option><option value="GBP">Libra (GBP)</option><option value="MXN">Peso mexicano (MXN)</option><option value="PEN">Sol peruano (PEN)</option><option value="BRL">Real (BRL)</option><option value="CAD">Dólar canadiense (CAD)</option></select>
+<label for="a">Aporte por periodo</label><input id="a" type="number" inputmode="decimal" value="20000" min="0">
+<div class="chips" id="ch"></div>
+<label for="f">Frecuencia</label>
+<select id="f"><option value="365">Diaria</option><option value="52">Semanal</option><option value="24">Quincenal</option><option value="12">Mensual</option></select>
+<label for="t">Tasa efectiva anual (%) — ajústala a la de tu entidad y moneda</label><input id="t" type="number" step="0.1" value="9.3">
+<label for="y">Plazo (años)</label><input id="y" type="number" min="1" max="50" value="10">
+<label for="m">Mi meta de ahorro (valor de hoy)</label><input id="m" type="number" value="50000000">
+<label for="i">Inflación anual estimada (%)</label><input id="i" type="number" step="0.1" value="5">
+<div class="k">La herramienta no convierte tasas de cambio: ingresa los montos en la moneda elegida. Al cambiar de moneda se sugieren montos típicos que puedes editar.</div>
+</div>
+
+<div class="c"><h2>Resultado</h2>
+<div class="k">Total aportado</div><div class="v" id="r1"></div>
+<div class="k">Valor futuro estimado</div><div class="v gold" id="r2"></div>
+<div class="k">Rendimientos estimados</div><div class="v grn" id="r3"></div>
+<div class="k">Poder de compra de hoy (descontando inflación)</div><div class="v" id="r4"></div>
+<div class="k" id="rp"></div>
+</div>
+
+<div class="c full"><h2>Aportes especiales</h2>
+<div class="k" style="margin-top:0">Un aporte extra se suma desde el mes que elijas (por ejemplo, una prima o un bono) y empieza a generar rendimientos desde ese momento.</div>
+<div class="sp">
+<div><label for="sa">Monto</label><input id="sa" type="number" inputmode="decimal" placeholder="0"></div>
+<div><label for="sm">Mes</label><select id="sm"></select></div>
+<div><label for="sy">Año del plan</label><input id="sy" type="number" min="1" max="50" value="1"></div>
+<div><label>&nbsp;</label><button class="btn p" id="sadd" type="button" style="width:100%">Agregar</button></div>
+</div>
+<label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="sr"> Repetir cada año desde ese año (ej.: una prima anual)</label>
+<div id="sl"></div>
+</div>
+
+<div class="c msg full"><p id="mot"></p></div>
+
+<div class="c full"><h2>Tu meta, con y sin inflación</h2>
+<div id="goal"></div><div class="bar"><i id="gb"></i></div>
+<div class="k" id="gbt"></div>
+</div>
+
+<div class="c full"><h2>Así crece con el tiempo</h2>
+<div class="wrap"><table><thead><tr><th>Plazo</th><th>Aportado</th><th>Valor estimado</th><th>Rendimientos</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+
+<div class="c full"><h2>Aportes vs. rendimientos, año a año</h2>
+<div class="wrap"><svg id="ch2" viewBox="0 0 640 220" width="100%" role="img" aria-label="Gráfico de crecimiento"></svg></div>
+<div class="lg"><span>Lo que aportas</span><span>Lo que ganan tus aportes</span></div>
+<div id="rd"></div>
+<div class="k">Toca o pasa el cursor sobre una barra para ver el valor aportado y el estimado de ese año.</div>
+</div>
+
+<div class="c full"><h2>Más razones para empezar hoy</h2>
+<div class="tri">
+<div class="b"><div class="k" style="margin:0">Tu ahorro equivale a</div><div class="v" id="e1"></div><div class="k" id="e1b"></div></div>
+<div class="b"><div class="k" style="margin:0">Primer año</div><div class="v gold" id="e2"></div><div class="k">A 3 y 6 meses: <span id="e2b"></span></div></div>
+<div class="b"><div class="k" style="margin:0">El costo de esperar</div><div class="v" id="e3"></div><div class="k" id="e3b"></div>
+<input id="d" type="range" min="0" max="10" value="3" style="padding:0;margin-top:8px"></div>
+</div></div>
+</div>
+
+<p class="small">Herramienta educativa. Los valores son estimaciones con tasa constante y aportes al final de cada periodo; las tasas reales varían y no están garantizadas. No constituye asesoría financiera.</p>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const NAMES={365:"día",52:"semana",24:"quincena",12:"mes"},FN={365:"Diaria",52:"Semanal",24:"Quincenal",12:"Mensual"};
+const MES=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const DEF={COP:{a:20000,m:50000000,c:[5000,10000,20000,50000]}};
+const OTH={a:5,m:10000,c:[2,5,10,20]};
+let SP=[],SEL=null;
+MES.forEach((m,i)=>{const o=document.createElement("option");o.value=i+1;o.textContent=m;$("sm").appendChild(o)});
+function cur(){return $("cur").value}
+function cop(n){const c=cur(),big=(c==="COP"||Math.abs(n)>=1000),d=big?0:2;return new Intl.NumberFormat("es-CO",{style:"currency",currency:c,minimumFractionDigits:d,maximumFractionDigits:d}).format(n)}
+function fvr(a,n,ea,yrs){const k=Math.round(yrs*n);if(k<=0)return 0;const r=Math.pow(1+ea,1/n)-1;return r===0?a*k:a*(Math.pow(1+r,k)-1)/r}
+function events(){const ev=[];SP.forEach(s=>{if(s.rep){for(let y=s.y;y<=80;y++)ev.push({t:((y-1)*12+s.mo)/12,amt:s.amt})}else ev.push({t:((s.y-1)*12+s.mo)/12,amt:s.amt})});return ev}
+let EV=[],P={};
+function valAt(x){let v=fvr(P.a,P.n,P.ea,x);for(const e of EV){if(e.t<=x+1e-9)v+=e.amt*Math.pow(1+P.ea,x-e.t)}return v}
+function contAt(x){let c=P.a*Math.round(x*P.n);for(const e of EV){if(e.t<=x+1e-9)c+=e.amt}return c}
+function chips(){const D=DEF[cur()]||OTH;$("ch").innerHTML="";D.c.forEach(v=>{const b=document.createElement("button");b.type="button";b.textContent=cop(v);b.onclick=()=>{$("a").value=v;go()};$("ch").appendChild(b)})}
+function renderSP(){$("sl").innerHTML=SP.map((s,i)=>"<span class='tag'>"+cop(s.amt)+" · "+MES[s.mo-1]+" del año "+s.y+(s.rep?" (cada año)":"")+" <b data-i='"+i+"' title='Quitar'>×</b></span>").join("")}
+$("sl").onclick=e=>{const i=e.target.dataset.i;if(i!==undefined){SP.splice(+i,1);renderSP();go()}};
+$("sadd").onclick=()=>{const amt=+$("sa").value;if(!(amt>0))return;SP.push({amt,mo:+$("sm").value,y:Math.max(1,Math.round(+$("sy").value||1)),rep:$("sr").checked});$("sa").value="";renderSP();go()};
+$("cur").onchange=()=>{const D=DEF[cur()]||OTH;$("a").value=D.a;$("m").value=D.m;SP=[];renderSP();chips();go()};
+function tiempo(m){return m<12?m+" meses":(m/12).toFixed(1)+" años"}
+function go(){
+const a=+$("a").value||0,n=+$("f").value,ea=(+$("t").value||0)/100,Y=Math.max(1,Math.min(50,Math.round(+$("y").value||1))),meta=+$("m").value||0,inf=(+$("i").value||0)/100;
+P={a,n,ea};EV=events();const d=Math.min(+$("d").value,Y-1);
+const F=valAt(Y),tot=contAt(Y),G=F-tot,real=F/Math.pow(1+inf,Y);
+$("r1").textContent=cop(tot);$("r2").textContent=cop(F);$("r3").textContent=cop(G);$("r4").textContent=cop(real);
+$("rp").textContent="Por cada "+cop(1)+" que aportas, tu dinero llega a "+cop(tot?F/tot:0).replace(/\.00$/,"")+".";
+$("ttl").textContent="¿Qué pueden hacer "+cop(a)+" por "+NAMES[n]+"?";
+const pct=F?Math.round(G/F*100):0;
+$("mot").innerHTML="En <b>"+Y+" años</b> pondrás <b>"+cop(tot)+"</b> y el interés compuesto aportará <b>"+cop(G)+"</b> ("+pct+"% del total). El tiempo trabaja contigo: lo importante es empezar y ser constante.";
+// meta con y sin inflacion
+let m1=null,m2=null;
+if(meta>0&&(a>0||EV.length)){for(let m=1;m<=960&&(m1===null||m2===null);m++){const x=m/12,v=valAt(x);if(m1===null&&v>=meta)m1=m;if(m2===null&&v>=meta*Math.pow(1+inf,x))m2=m}}
+const metaY=meta*Math.pow(1+inf,Y);
+$("goal").innerHTML="Tu meta de hoy: <b>"+cop(meta)+"</b>. Con inflación de "+(inf*100).toFixed(1)+"% anual, dentro de "+Y+" años esa misma meta costará <b class='gold'>"+cop(metaY)+"</b>.<br>Sin inflación la alcanzas en: <b>"+(m1?tiempo(m1):"más de 80 años")+"</b>. Con inflación: <b class='gold'>"+(m2?tiempo(m2):"no se alcanza en 80 años (sube aporte, plazo o tasa)")+"</b>.";
+$("gb").style.width=Math.min(100,metaY?F/metaY*100:0)+"%";
+$("gbt").textContent="En tu plazo de "+Y+" años llevarías el "+Math.min(100,Math.round(metaY?F/metaY*100:0))+"% de la meta ajustada por inflación ("+(meta?Math.min(100,Math.round(F/meta*100)):0)+"% de la meta sin ajustar).";
+// tabla
+const ys=[...new Set([1,5,10,20,40,Y])].sort((x,y)=>x-y);
+const rows=ys.map(y=>{const t=contAt(y),f=valAt(y);return"<tr"+(y===Y?" style='font-weight:700'":"")+"><td>"+y+(y===1?" año":" años")+"</td><td>"+cop(t)+"</td><td class='gold'>"+cop(f)+"</td><td>"+cop(f-t)+"</td></tr>"}).join("");
+$("tb").innerHTML=rows;
+// grafico
+if(SEL===null||SEL>Y)SEL=Y;drawChart(Y,F);
+// extras
+$("e1").textContent=cop(a*n/12)+" al mes";$("e1b").textContent="Es lo que apartas cada mes con tu aporte regular (≈ "+cop(a*n)+" al año).";
+$("e2").textContent=cop(valAt(1));$("e2b").textContent=cop(valAt(.25))+" · "+cop(valAt(.5));
+const lost=F-valAt(Y-d);
+$("e3").textContent=d?cop(lost):cop(0);$("e3b").textContent=d?"Es lo que dejarías de ganar si esperas "+d+" años para empezar (mueve la barra).":"Mueve la barra para ver cuánto cuesta esperar.";
+}
+function drawChart(Y,F){
+const W=640,H=220,L=6,B=24,mx=F||1,bw=(W-L*2)/Y;let sv="";
+for(let y=1;y<=Y;y++){const t=contAt(y),f=valAt(y),h1=(t/mx)*(H-B-8),h2=((f-t)/mx)*(H-B-8),x=L+(y-1)*bw;
+sv+="<rect x='"+(x+1)+"' y='"+(H-B-h1)+"' width='"+Math.max(1,bw-2)+"' height='"+h1+"' fill='var(--bar1)'/><rect x='"+(x+1)+"' y='"+(H-B-h1-h2)+"' width='"+Math.max(1,bw-2)+"' height='"+h2+"' fill='var(--acc)'/>";
+if(y===SEL)sv+="<rect x='"+x+"' y='2' width='"+bw+"' height='"+(H-B)+"' fill='none' stroke='var(--ink)' stroke-width='1.5' rx='2'/>";
+if(Y<=15||y%5===0||y===Y)sv+="<text x='"+(x+bw/2)+"' y='"+(H-8)+"' font-size='10' text-anchor='middle' fill='var(--mut)'>"+y+"</text>";
+sv+="<rect class='h' data-y='"+y+"' x='"+x+"' y='0' width='"+bw+"' height='"+(H-B)+"' fill='transparent'/>"}
+$("ch2").innerHTML=sv;
+const t=contAt(SEL),f=valAt(SEL);
+$("rd").innerHTML="<b>Año "+SEL+":</b> aportado <b>"+cop(t)+"</b> · valor estimado <b class='gold'>"+cop(f)+"</b> · rendimientos <b class='grn'>"+cop(f-t)+"</b>";
+}
+function pick(e){const y=e.target.dataset&&e.target.dataset.y;if(y&&+y!==SEL){SEL=+y;go()}}
+$("ch2").addEventListener("click",pick);$("ch2").addEventListener("pointerover",pick);
+["a","f","t","y","m","i","d"].forEach(i=>$(i).addEventListener("input",go));
+chips();go();
+</script>
+</body>
+</html>
